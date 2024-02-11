@@ -14,9 +14,9 @@ def fetch_data():
 def create_sensors(hass: HomeAssistantType, data: dict):
     """Create sensors in Home Assistant."""
     for key, value in data.items():
-        # Parse sensor key using regex
-        match = re.match(r"([a-zA-Z]+)(\d+)?_(value|state|runtime|last_on|last_off)?", key)
-        if match:
+        if match := re.match(
+            r"([a-zA-Z]+)(\d+)?_(value|state|runtime|last_on|last_off)?", key
+        ):
             sensor_type, sensor_num, sensor_property = match.groups()
             friendly_name = f"{sensor_type.capitalize()} {sensor_num}" if sensor_num else sensor_type.capitalize()
             unit_of_measurement = ""
