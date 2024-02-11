@@ -8,5 +8,12 @@ RUN \
     curl -sSLf -o /usr/bin/tempio \
     "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
 
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
 # Copy root filesystem
 COPY rootfs /
+
+COPY . .
+
+CMD [ "python", "./main.py" ]
