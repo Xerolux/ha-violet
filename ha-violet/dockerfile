@@ -3,12 +3,22 @@ ARG BUILD_FROM
 
 FROM python:3.11-slim
 
+# Install Rust and Cargo
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+# Set environment variables to configure Cargo
+ENV PATH="/root/.cargo/bin:${PATH}" \
+    CARGO_HOME="/root/.cargo"
+
 WORKDIR /app
 
-#COPY requirements.txt .
-#RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install requests homeassistant
+
 COPY . .
 
 CMD [ "python", "./main.py" ]
+
 
