@@ -17,4 +17,4 @@ options:
   message: "Hello world..."
 schema:
   message: "str?"
-image: "docker pull ghcr.io/xerolux/ha-violet"
+image: "ghcr.io/xerolux/ha-violet"
